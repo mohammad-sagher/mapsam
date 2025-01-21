@@ -42,7 +42,9 @@
          </a>
          <ul class="dropdown-menu dropdown-menu-right">
           <li class="dropdown-item user-details">
-           <a href="{{ route('profile.edit') }}">
+          @if(auth()->guard('accountant')->check())
+           <a href="{{ route('accountant.ShowProfile') }}">
+            @endif
               <div class="media">
                 <div class="avatar"><img class="mr-3 align-self-start" src="{{asset('https://via.placeholder.com/110x110') }}" alt="user avatar"></div>
                <div class="media-body">
