@@ -34,6 +34,9 @@ Route::get('/dashboard', function () {
     Route::put('/profile/activity', [PorifileDataController::class, 'updateActivity'])->name('profile.update.activity');
     Route::view('/dashboard-profile1', 'auth.login')->name('profile');
 
+    //profile.update.activity
+    //profile-update
+
       Route::group(['middleware' => 'auth:admin'], function(){
 
         Route::view('/testTable', 'section.tables')->name('tables');

@@ -16,13 +16,15 @@ class AccountantRegisterControler extends Controller
     }
     public function Register(AccountantRegisterRequest $request){
 
-        Accountant::create([
+      $accountant=  Accountant::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'phone'=>$request->phone,
             'address'=>$request->address,
         ]);
+        //create profile
+        AcountantBrofileController::createProfile($accountant);
         return redirect()->route('admin.dashboard')->with('success','Accountant registered successfully');
     }
 }
