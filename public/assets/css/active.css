@@ -1,0 +1,30 @@
+.activity-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.icon {
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.icon:hover {
+    color: #007BFF;
+}
+
+form {
+    display: none; /* إخفاء النماذج افتراضيًا */
+    margin-top: 10px;
+}
+
+form.hidden {
+    display: none;
+}
+
+form.visible {
+    display: block;
+}
