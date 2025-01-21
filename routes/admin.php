@@ -33,6 +33,10 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
      //admin logout
         Route::post('/auth/logout',[AdminLoginController::class,'Logout'])->name('logout')->middleware('auth:admin');
 });
+
+
+
+
 Route::get('/adminDashboard',function(){
     return view('admin.index');
 })->name('admin.dashboard')->middleware('auth:admin');

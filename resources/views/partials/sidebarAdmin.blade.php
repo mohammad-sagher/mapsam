@@ -22,6 +22,14 @@
       @endif
 
     </li>
+    <li>
+        @if(auth()->guard('admin')->check())
+        <a href="{{route('accountant.ShowRegister')}}" >
+          <i class="zmdi zmdi-invert-colors"></i> <span>Registeration accountant</span>
+        </a>
+        @endif
+
+      </li>
 
      <li>
        <a href="{{route('icones')}}">
