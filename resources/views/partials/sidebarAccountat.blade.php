@@ -45,7 +45,7 @@
        </li>
 
        <li>
-         <a href="{{route('profile.edit')}}">
+         <a href="{{route('accountant.ShowProfile')}}">
            <i class="zmdi zmdi-face"></i> <span>Profile</span>
          </a>
        </li>
