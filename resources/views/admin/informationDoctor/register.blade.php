@@ -3,7 +3,7 @@
             registeration Doctor
         @endsection
     @section('sidebar')
-        @include('partials.sidebar')
+        @include('partials.sidebarAdmin')
 
 
     @endsection
@@ -15,7 +15,7 @@
         <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-            <div class="card-title">Vertical Form</div>
+            <div class="card-title">Registeration Doctor</div>
             <hr>
             <form action="{{route('doctor.Register')}}" method="post">
                 @csrf
