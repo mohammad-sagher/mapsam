@@ -27,6 +27,10 @@ class RedirectIfAuthenticated
                 if($guard == 'doctor'){
                     return redirect(RouteServiceProvider::DOCTOR_DASHBOARD);
                 }
+                if($guard == 'accountant'){
+                    return redirect(RouteServiceProvider::ACCOUNTANT_DASHBOARD);
+                }
+
             }
         }
 
