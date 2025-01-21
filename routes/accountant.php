@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\admin\accountant\AccountantLoginControler;
 use App\Http\Controllers\admin\accountant\AccountantRegisterControler;
+use App\Http\Controllers\accountant\AcountantProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,25 @@ Route::group(['prefix'=>'accountant','as'=>'accountant.'],function(){
     Route::get('/auth/register',[AccountantRegisterControler::class,'ShowRegister'])->name('ShowRegister')->middleware('auth:admin');
     Route::post('/auth/register',[AccountantRegisterControler::class,'Register'])->name('Register')->middleware('auth:admin');
     Route::post('/auth/logout',[AccountantLoginControler::class,'Logout'])->name('Logout');
+
+
+
+
+  //profile
+  Route::prefix('profile')->group(function(){
+    Route::get('/',[AcountantProfileController::class,'ShowProfile'])
+                   ->name('ShowProfile');
+
+    Route::put('/activity',[AcountantProfileController::class,'updateActivity'])
+                    ->name('updateActivity');
+
+    Route::put('/data',[AcountantProfileController::class,'updateData'])
+                    ->name('updateData');
+
+    Route::put('/password',[AcountantProfileController::class,'updatePassword'])
+           ->name('updatePassword');
+
+  })->middleware('auth:accountant');
 
 });
 
