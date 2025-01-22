@@ -16,7 +16,7 @@ class DoctorRegisterController extends Controller
     public function Register(DoctorRegisterRequest $request){
 
 
-        Doctor::create([
+        $doctor= Doctor::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
@@ -25,6 +25,8 @@ class DoctorRegisterController extends Controller
             'speciality'=>$request->speciality,
 
         ]);
-        return redirect()->route('admin.dashboard')->with('success','Doctor registered successfully');
+        DoctorProfileControllerByAdmin::createProfile($doctor);
+
+        return redirect()->route('admin.dashboard')->with('success','Doctor registered successfully and profile created');
     }
 }
