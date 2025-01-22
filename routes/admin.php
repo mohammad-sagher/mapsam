@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\admin\auth\AdminLoginController;
 use App\Http\Controllers\admin\auth\AdminRegisterController;
 use App\Http\Controllers\admin\doctor\InformationDoctorController;
+use App\Http\Controllers\admin\profile\AdminProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocailiteController;
 use App\Http\Controllers\ProfileController;
@@ -33,7 +34,12 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
      //admin logout
         Route::post('/auth/logout',[AdminLoginController::class,'Logout'])->name('logout')->middleware('auth:admin');
 });
-
+ Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
+    Route::get('/profile/show',[AdminProfileController::class,'ShowProfile'])->name('profile.show')->middleware('auth:admin');
+    Route::put('/profile/updatePassword',[AdminProfileController::class,'updatePassword'])->name('updatePassword')->middleware('auth:admin');
+    Route::put('/profile/updateData',[AdminProfileController::class,'updateData'])->name('updateData')->middleware('auth:admin');
+    Route::put('/profile/updateActivity',[AdminProfileController::class,'updateActivity'])->name('updateActivity')->middleware('auth:admin');
+ });
 
 
 
