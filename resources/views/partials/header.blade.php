@@ -45,6 +45,9 @@
           @if(auth()->guard('accountant')->check())
            <a href="{{ route('accountant.ShowProfile') }}">
             @endif
+            @if(auth()->guard('admin')->check())
+           <a href="{{ route('admin.profile.show') }}">
+            @endif
               <div class="media">
                 <div class="avatar"><img class="mr-3 align-self-start" src="{{asset('https://via.placeholder.com/110x110') }}" alt="user avatar"></div>
                <div class="media-body">
@@ -70,15 +73,23 @@
            <li class="dropdown-item"><i class="mr-2 icon-settings"></i> Setting</li>
            <li class="dropdown-divider"></li>
            <li class="dropdown-item">
-
-             <form action="{{ route('logout') }}" method="POST">
+            @if(auth()->guard('admin')->check())
+             <form action="{{ route('admin.logout') }}" method="POST">
                     @csrf
 
                <button type="submit" class="p-0 dropdown-item">
                  <i class="mr-2 icon-power"></i> Logout
                </button>
              </form>
+             @elseif(auth()->guard('doctor')->check())
+             <form action="{{ route('doctor.logout') }}" method="POST">
+                    @csrf
 
+               <button type="submit" class="p-0 dropdown-item">
+                 <i class="mr-2 icon-power"></i> Logout
+               </button>
+             </form>
+             @endif
            </li>
          </ul>
        </li>
