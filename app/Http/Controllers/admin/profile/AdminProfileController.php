@@ -16,6 +16,7 @@ class AdminProfileController extends Controller
     public static function ShowProfile(){
         $admin=Auth::guard('admin')->user();
         $profile=Profile::where('id',$admin->profile_id)->first();
+        
         return view('admin.profile.show',compact('profile'));
     }
 
@@ -29,6 +30,7 @@ class AdminProfileController extends Controller
             'about' => $request->about,
         ]);
         return redirect()->route('admin.profile.show')->with('success', 'Profile updated successfully');
+
 
 
 
