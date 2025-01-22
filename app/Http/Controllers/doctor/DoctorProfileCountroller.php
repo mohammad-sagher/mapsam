@@ -1,36 +1,35 @@
 <?php
 
-namespace App\Http\Controllers\admin\profile;
+namespace App\Http\Controllers\doctor;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
-use App\Http\Requests\DataProfileActiveRequest;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
+use App\Http\Requests\DataProfileActiveRequest;
 
-class AdminProfileController extends Controller
+class DoctorProfileCountroller extends Controller
 {
     //
-    public static function ShowProfile(){
-        $admin=Auth::guard('admin')->user();
-        $profile=Profile::where('id',$admin->profile_id)->first();
-        
-        return view('admin.profile.show',compact('profile'));
+    public function ShowProfile(){
+
+        $doctor=Auth::guard('doctor')->user();
+        $profile=Profile::where('id',$doctor->profile_id)->first();
+        return view('doctors.profile.show',compact('profile'));
     }
 
     public function updateActivity(DataProfileActiveRequest $request){
-        $admin=Auth::guard('admin')->user();
-        $profile=Profile::where('id',$admin->profile_id)->first();
+        $doctor=Auth::guard('doctor')->user();
+        $profile=Profile::where('id',$doctor->profile_id)->first();
         $profile->update([
             'Recent_badges' => $request->Recent_badges,
             'recent_activity' => $request->recent_activity,
             'hobbies' => $request->hobbies,
             'about' => $request->about,
         ]);
-        return redirect()->route('admin.profile.show')->with('success', 'Profile updated successfully');
-
+        return redirect()->route('doctor.profile')->with('success', 'Profile updated successfully');
 
 
 
@@ -41,13 +40,14 @@ class AdminProfileController extends Controller
 
 
 
-        $admin=Auth::guard('admin')->user();
-        $profile=Profile::where('id',$admin->profile_id)->first();
+        $doctor=Auth::guard('doctor')->user();
+        $profile=Profile::where('id',$doctor->profile_id)->first();
         $profile->update([
             'username' => $request->username,
             'phone' => $request->phone,
             'address' => $request->address,
-
+            'city' => $request->city,
+            'state' => $request->state,
         ]);
 
         if($request->hasFile('image')){
@@ -59,7 +59,7 @@ class AdminProfileController extends Controller
            ]);
         }
 
-        return redirect()->route('admin.profile.show')->with('success', 'Profile updated successfully');
+        return redirect()->route('doctor.profile')->with('success', 'Profile updated successfully');
     }
 
 
@@ -67,11 +67,12 @@ class AdminProfileController extends Controller
         $validated = $request->validateWithBag('updatePassword', [
             'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
-        $admin=Auth::guard('admin')->user();
-        $admin->update([
+        $doctor=Auth::guard('doctor')->user();
+        $doctor->update([
             'password' => Hash::make($validated['password']),
         ]);
-        return redirect()->route('admin.profile.show')->with('success', 'Password updated successfully');
+        return redirect()->route('doctor.profile')->with('success', 'Password updated successfully');
     }
-}
 
+
+}

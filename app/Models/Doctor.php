@@ -50,6 +50,8 @@ class Doctor extends Authenticatable
     protected $table = 'doctors';
 
 
-   
+   public function profile(){
+    return $this->hasOne(Profile::class);
+   }
 
     }
