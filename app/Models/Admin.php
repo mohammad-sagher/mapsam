@@ -49,4 +49,6 @@ class Admin extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+   
 }
