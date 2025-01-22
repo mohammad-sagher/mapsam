@@ -57,16 +57,16 @@
      </li>
 
      <li>
-       <a href="{{route('profile.edit')}}">
+       <a href="{{route('admin.profile.show')}}">
          <i class="zmdi zmdi-face"></i> <span>Profile</span>
        </a>
      </li>
 
      <li>
-      @if(auth()->guard('doctor')->check())
 
 
-      @elseif(auth()->guard('admin')->check())
+
+      @if(auth()->guard('admin')->check())
 
           <form action="{{ route('admin.logout') }}" method="POST" style="display: inline;">
               @csrf

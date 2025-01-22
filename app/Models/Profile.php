@@ -18,4 +18,7 @@ class Profile extends Model
     public function accountant(){
         return $this->belongsTo(Accountant::class);
     }
+    public function admin(){
+        return $this->belongsTo(Admin::class);
+    }
 }

@@ -16,10 +16,9 @@ return new class extends Migration
 
 
             $table->string('phone');
-            $table->string('username');
+            $table->string('username')->nullable();
             $table->string('address');
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
+        
             $table->string('hobbies')->nullable();
             $table->string('image')->nullable();
 

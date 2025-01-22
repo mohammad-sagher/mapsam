@@ -42,6 +42,24 @@
 				  </div>
 			   </div>
 			  </div>
+              <div class="form-group">
+                <label for="exampleInputPhone" class="sr-only">Phone</label>
+                <div class="position-relative has-icon-right">
+                  <input type="text" id="exampleInputPhone" name="phone" class="form-control input-shadow" placeholder="Enter Your Phone Number">
+                  <div class="form-control-position">
+                    <i class="icon-phone"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputAddress" class="sr-only">Address</label>
+                <div class="position-relative has-icon-right">
+                  <input type="text" id="exampleInputAddress" name="address" class="form-control input-shadow" placeholder="Enter Your Address">
+                  <div class="form-control-position">
+                    <i class="icon-map-marker"></i>
+                  </div>
+                </div>
+              </div>
 			  <div class="form-group">
 			   <label for="exampleInputPassword" class="sr-only">Password</label>
 			   <div class="position-relative has-icon-right">
