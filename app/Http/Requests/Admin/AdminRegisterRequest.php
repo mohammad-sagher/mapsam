@@ -21,11 +21,14 @@ class AdminRegisterRequest extends FormRequest
      */
     public function rules(): array
     {
+       
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'admin_key' => 'required|string|min:8',
+            'phone' => 'required|string|min:10',
+            'address' => 'required|string',
 
             //
         ];
