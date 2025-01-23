@@ -1,7 +1,5 @@
 @extends('dashboard.master')
-@section('title')
-    Accountant
-@endsection
+
 
 @section('sidebar')
     @include('partials.sidebarAccountat')
@@ -14,19 +12,27 @@
         <div class="mt-3 row">
             <div class="col-lg-4">
                 <div class="card profile-card-2" style="height: 100%;"> <!-- استخدام 100% للإرتفاع -->
-                    <div class="card-img-block">
-                        <img class="img-fluid" src="https://via.placeholder.com/800x500" alt="Card image cap">
-                    </div>
-                    <div class="pt-5 card-body">
-                        <img src="https://via.placeholder.com/110x110" alt="profile-image" class="profile">
-                        <h5 class="card-title">{{ $profile->username ?? Auth::guard('accountant')->user()->name }}</h5>
-                        <p class="card-text">{{ Auth::guard('accountant')->user()->email }}</p>
-                        <div class="icon-block">
-                            <a href="javascript:void();"><i class="text-white fa fa-facebook bg-facebook"></i></a>
-                            <a href="javascript:void();"><i class="text-white fa fa-twitter bg-twitter"></i></a>
-                            <a href="javascript:void();"><i class="text-white fa fa-google-plus bg-google-plus"></i></a>
+
+
+
+                    <div class="flex items-center justify-between pt-5 card-body">
+                        <div>
+                            <h5 class="text-left card-title">{{ $profile->username ?? Auth::guard('accountant')->user()->name }}</h5>
+                            <p class="text-left card-text">{{ Auth::guard('accountant')->user()->email }}</p>
+                            <div class="flex space-x-2 text-left icon-block">
+                                <a href="javascript:void();"><i class="text-white fa fa-facebook bg-facebook"></i></a>
+                                <a href="javascript:void();"><i class="text-white fa fa-twitter bg-twitter"></i></a>
+                                <a href="javascript:void();"><i class="text-white fa fa-google-plus bg-google-plus"></i></a>
+                            </div>
                         </div>
+
+                        <img src="{{asset('images/profile/'.auth()->guard('accountant')->user()->images->url) }}" alt="profile-image" class="w-16 h-16 ml-4 rounded-full">
+
+
                     </div>
+
+
+
 
                     <div class="card-body border-top border-light">
                         @foreach (['HTML5' => 65, 'Bootstrap 4' => 50, 'AngularJS' => 70, 'React JS' => 35] as $skill => $percentage)
@@ -66,7 +72,7 @@
                         </ul>
                         <div class="p-3 tab-content">
                             <div class="tab-pane active" id="profile">
-                                <h5 class="mb-3">User Profile</h5>
+                                <h5 class="mb-3">accountant Profile</h5>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h6>About</h6>
@@ -146,14 +152,16 @@
 
                             <!-- Edit Tab -->
                             <div class="tab-pane" id="edit">
-
+                                    <form action="{{ route('accountant.updateImage') }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="file" name="image" class="form-control">
+                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                    </form>
                                 <form action="{{ route('accountant.updateData') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
-                                        <div class="col-lg-9"><input class="file" name="image" type="file" accept="image/*" id="image"></div>
-                                    </div>
+
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                         <div class="col-lg-9"><input class="form-control" name="phone" type="text" value="{{ $profile->phone ?? Auth::guard('accountant')->user()->phone }}"></div>
