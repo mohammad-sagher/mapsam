@@ -16,7 +16,7 @@
                 <div class="card profile-card-2" style="height: 100%;"> <!-- استخدام 100% للإرتفاع -->
 
 
-                    @if(auth()->guard('admin')->user()->images->count() > 0)
+
                     <div class="flex items-center justify-between pt-5 card-body">
                         <div>
                             <h5 class="text-left card-title">{{ $profile->username ?? Auth::guard('admin')->user()->name }}</h5>
@@ -27,7 +27,7 @@
                                 <a href="javascript:void();"><i class="text-white fa fa-google-plus bg-google-plus"></i></a>
                             </div>
                         </div>
-                        @endif
+
                         <img src="{{asset('images/profile/'.auth()->user()->images->url) }}" alt="profile-image" class="w-16 h-16 ml-4 rounded-full">
 
 
