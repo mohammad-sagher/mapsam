@@ -50,14 +50,7 @@ class DoctorProfileCountroller extends Controller
             'state' => $request->state,
         ]);
 
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $imageName = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images/profile'), $imageName);
-           $profile->update([
-            'image' => $imageName,
-           ]);
-        }
+
 
         return redirect()->route('doctor.profile')->with('success', 'Profile updated successfully');
     }
@@ -72,6 +65,24 @@ class DoctorProfileCountroller extends Controller
             'password' => Hash::make($validated['password']),
         ]);
         return redirect()->route('doctor.profile')->with('success', 'Password updated successfully');
+    }
+    public function updateImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        $doctor=Auth::guard('doctor')->user();
+
+           if($request->hasFile('image')){
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images/profile'), $imageName);
+            $doctor->images()->updateOrCreate(['imageble_id'=>$doctor->id],[
+                'url' => $imageName
+            ]);
+        }
+
+        return redirect()->route('doctor.profile')->with('success', 'Image updated successfully');
     }
 
 
