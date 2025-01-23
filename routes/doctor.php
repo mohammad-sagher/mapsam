@@ -63,6 +63,9 @@ Route::group(['prefix'=>'doctor','as'=>'doctor.'],function(){
     })->name('doctor.dashboard')->middleware('auth:doctor');
 
 
+
+
+
     Route::get('/testimage', function () {
         if(auth()->guard('doctor')->check()){
             $doctor=Auth::guard('doctor')->user()->images;
@@ -71,6 +74,10 @@ Route::group(['prefix'=>'doctor','as'=>'doctor.'],function(){
         if(auth()->guard('admin')->check()){
             $admin=Auth::guard('admin')->user()->images;
             dd($admin->first()->url);
+        }
+        if(auth()->guard('accountant')->check()){
+            $accountant=Auth::guard('accountant')->user()->images;
+            dd($accountant->first());
         }
 
 
