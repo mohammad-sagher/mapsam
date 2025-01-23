@@ -25,6 +25,10 @@ class AccountantRegisterControler extends Controller
         ]);
         //create profile
         AcountantBrofileController::createProfile($accountant);
+
+        $accountant->images()->createOrFirst(['imageable_id'=>$accountant->id],[
+            'url' => 'defult.jpg',
+           ]);
         return redirect()->route('admin.dashboard')->with('success','Accountant registered successfully');
     }
 }
