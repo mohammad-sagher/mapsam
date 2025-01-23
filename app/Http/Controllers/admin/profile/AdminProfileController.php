@@ -16,7 +16,7 @@ class AdminProfileController extends Controller
     public static function ShowProfile(){
         $admin=Auth::guard('admin')->user();
         $profile=Profile::where('id',$admin->profile_id)->first();
-        
+
         return view('admin.profile.show',compact('profile'));
     }
 
@@ -50,15 +50,6 @@ class AdminProfileController extends Controller
 
         ]);
 
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $imageName = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images/profile'), $imageName);
-           $profile->update([
-            'image' => $imageName,
-           ]);
-        }
-
         return redirect()->route('admin.profile.show')->with('success', 'Profile updated successfully');
     }
 
@@ -73,5 +64,23 @@ class AdminProfileController extends Controller
         ]);
         return redirect()->route('admin.profile.show')->with('success', 'Password updated successfully');
     }
-}
 
+    public function updateImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        $admin=Auth::guard('admin')->user();
+
+           if($request->hasFile('image')){
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images/profile'), $imageName);
+            $admin->images()->updateOrCreate(['imageble_id'=>$admin->id],[
+                'url' => $imageName
+            ]);
+        }
+
+        return redirect()->route('admin.profile.show')->with('success', 'Image updated successfully');
+    }
+}

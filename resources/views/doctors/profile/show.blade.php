@@ -4,7 +4,7 @@
 @endsection
 
 @section('sidebar')
-    @include('partials.sidebarAccountat')
+    @include('partials.sidebarDoctor')
 @endsection
 
 @section('content')
