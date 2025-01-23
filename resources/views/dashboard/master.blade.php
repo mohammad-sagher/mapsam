@@ -1,64 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
- @include('partials.head')
- @yield('title')
 
+<head>
+    @include('partials.head')
+    @yield('title')
 </head>
 
-
 <body class="bg-theme bg-theme1">
-@include('section.allert')
+    @include('section.allert')
 
-<!-- Start wrapper-->
- <div id="wrapper">
+    <!-- Start wrapper-->
+    <div id="wrapper">
 
-  <!--Start sidebar-wrapper-->
-  @yield('sidebar')
+        <!--Start sidebar-wrapper-->
+        @yield('sidebar')
+        <!--End sidebar-wrapper-->
 
-   <!--End sidebar-wrapper-->
+        <!--Start topbar header-->
+        @include('partials.header')
+        <!--End topbar header-->
 
-<!--Start topbar header-->
-@include('partials.header')
-<!--End topbar header-->
+        <div class="clearfix"></div>
 
-<div class="clearfix"></div>
+        <div class="content-wrapper">
+            <div class="container-fluid">
 
-  <div class="content-wrapper">
-    <div class="container-fluid">
+                <!--Start Dashboard Content-->
+                @yield('content')
+                <!--End Dashboard Content-->
 
-  <!--Start Dashboard Content-->
+                <!--start overlay-->
+                <div class="overlay toggle-menu"></div>
+                <!--end overlay-->
 
-       @yield('content')
+            </div>
+            <!-- End container-fluid-->
+        </div>
+        <!--End content-wrapper-->
 
-      <!--End Dashboard Content-->
+        <!--Start Back To Top Button-->
+        @include('partials.backToTopButten')
+        <!--End Back To Top Button-->
 
-	<!--start overlay-->
-		  <div class="overlay toggle-menu"></div>
-		  <!--end overlay-->
+        <!--Start footer-->
+        @include('partials.footer')
+        <!--End footer-->
+
+        <!--start color switcher-->
+        @include('partials.colorSwitcher')
+        <!--end color switcher-->
 
     </div>
-    <!-- End container-fluid-->
+    <!--End wrapper-->
 
-    </div>
-    <!--End content-wrapper-->
-   <!--Start Back To Top Button-->
-   @include('partials.backToTopButten')
-    <!--End Back To Top Button-->
-
-	<!--Start footer-->
-	@include('partials.footer')
-	<!--End footer-->
-
-  <!--start color switcher-->
-  @include('partials.colorSwitcher')
-  <!--end color switcher-->
-
-  </div><!--End wrapper-->
-
-
-  <!-- Bootstrap core JavaScript-->
-  @include('partials.js')
+    <!-- Bootstrap core JavaScript-->
+    @include('partials.js')
 
 </body>
+
 </html>

@@ -1,7 +1,5 @@
 @extends('dashboard.master')
-@section('title')
-    Admin
-@endsection
+
 @section('sidebar')
     @include('partials.sidebarAdmin')
 
