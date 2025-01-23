@@ -47,6 +47,9 @@ Route::group(['prefix'=>'accountant','as'=>'accountant.'],function(){
     Route::put('/password',[AcountantProfileController::class,'updatePassword'])
            ->name('updatePassword');
 
+    Route::put('/image',[AcountantProfileController::class,'updateImage'])
+           ->name('updateImage');
+
   })->middleware('auth:accountant');
 
 });

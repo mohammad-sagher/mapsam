@@ -54,7 +54,7 @@ class AcountantProfileController extends Controller
             'image' => $imageName,
            ]);
         }
-       
+
         return redirect()->route('accountant.ShowProfile')->with('success', 'Profile updated successfully');
     }
 
@@ -68,6 +68,25 @@ class AcountantProfileController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
         return redirect()->route('accountant.ShowProfile')->with('success', 'Password updated successfully');
+    }
+
+  public function updateImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        $accountant=Auth::guard('accountant')->user();
+
+           if($request->hasFile('image')){
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images/profile'), $imageName);
+            $accountant->images()->updateOrCreate(['imageble_id'=>$accountant->id],[
+                'url' => $imageName
+            ]);
+        }
+
+        return redirect()->route('accountant.ShowProfile')->with('success', 'Image updated successfully');
     }
 
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 class Accountant extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -51,4 +51,9 @@ class Accountant extends Authenticatable
     public function profile(){
         return $this->hasOne(Profile::class);
     }
+    public function images() : MorphOne
+    {
+        return $this->morphOne(Image::class,'imageble');
+    }
 }
+

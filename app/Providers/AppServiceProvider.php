@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Models\Admin;
 use App\Models\Doctor;
+use App\Models\Accountant;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap([
             'admin' => Admin::class,
             'doctor' => Doctor::class,
+            'accountant' => Accountant::class,
         ]);
     }
 }
