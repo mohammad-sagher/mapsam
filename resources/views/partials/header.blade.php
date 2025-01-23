@@ -36,10 +36,23 @@
            </ul>
        </li>
        <!-- user -->
+       @if(auth()->guard('admin')->check())
        <li class="nav-item">
          <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-           <span class="user-profile"><img src="{{asset('https://via.placeholder.com/110x110') }}" class="img-circle" alt="user avatar"></span>
+           <span class="user-profile"><img src="{{asset('images/profile/'.auth()->guard('admin')->user()->images->first()->url) }}" class="img-circle" alt="user avatar"></span>
          </a>
+         @elseif(auth()->guard('doctor')->check())
+         <li class="nav-item">
+         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
+           <span class="user-profile"><img src="{{asset('images/profile/'.auth()->guard('doctor')->user()->images->first()->url) }}" class="img-circle" alt="user avatar"></span>
+         </a>
+         @elseif(auth()->guard('accountant')->check())
+         <li class="nav-item">
+         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
+           <span class="user-profile"><img src="{{asset('images/profile/'.auth()->guard('accountant')->user()->images->first()->url) }}" class="img-circle" alt="user avatar"></span>
+         </a>
+         @endif
+
          <ul class="dropdown-menu dropdown-menu-right">
           <li class="dropdown-item user-details">
           @if(auth()->guard('accountant')->check())
@@ -48,8 +61,16 @@
             @if(auth()->guard('admin')->check())
            <a href="{{ route('admin.profile.show') }}">
             @endif
+            @if(auth()->guard('admin')->check())
               <div class="media">
-                <div class="avatar"><img class="mr-3 align-self-start" src="{{asset('https://via.placeholder.com/110x110') }}" alt="user avatar"></div>
+                <div class="avatar"><img class="mr-3 align-self-start" src="{{asset('images/profile/'.auth()->guard('admin')->user()->images->first()->url) }}" alt="user avatar"></div>
+                @elseif(auth()->guard('doctor')->check())
+                <div class="avatar"><img class="mr-3 align-self-start" src="{{asset('images/profile/'.auth()->guard('doctor')->user()->images->first()->url) }}" alt="user avatar"></div>
+                @elseif(auth()->guard('accountant')->check())
+                <div class="avatar"><img class="mr-3 align-self-start" src="{{asset('images/profile/'.auth()->guard('accountant')->user()->images->first()->url) }}" alt="user avatar"></div>
+                @else
+                <div class="avatar"><img class="mr-3 align-self-start" src="{{asset('images/profile/defualt/defult.jpg') }}" alt="user avatar"></div>
+                @endif
                <div class="media-body">
                 @if(auth()->guard('admin')->check())
                <h6 class="mt-2 user-title">{{ auth()->guard('admin')->user()->name }}</h6>
@@ -84,7 +105,13 @@
              @elseif(auth()->guard('doctor')->check())
              <form action="{{ route('doctor.logout') }}" method="POST">
                     @csrf
-
+               <button type="submit" class="p-0 dropdown-item">
+                 <i class="mr-2 icon-power"></i> Logout
+               </button>
+             </form>
+             @elseif(auth()->guard('accountant')->check())
+             <form action="{{ route('accountant.logout') }}" method="POST">
+                    @csrf
                <button type="submit" class="p-0 dropdown-item">
                  <i class="mr-2 icon-power"></i> Logout
                </button>

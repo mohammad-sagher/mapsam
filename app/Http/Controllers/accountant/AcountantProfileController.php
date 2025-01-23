@@ -42,7 +42,7 @@ class AcountantProfileController extends Controller
             'username' => $request->username,
             'phone' => $request->phone,
             'address' => $request->address,
-            'city' => $request->city,   
+            'city' => $request->city,
             'state' => $request->state,
         ]);
 
@@ -54,7 +54,7 @@ class AcountantProfileController extends Controller
             'image' => $imageName,
            ]);
         }
-        dd($profile);
+       
         return redirect()->route('accountant.ShowProfile')->with('success', 'Profile updated successfully');
     }
 

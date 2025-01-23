@@ -39,6 +39,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
     Route::put('/profile/updatePassword',[AdminProfileController::class,'updatePassword'])->name('updatePassword')->middleware('auth:admin');
     Route::put('/profile/updateData',[AdminProfileController::class,'updateData'])->name('updateData')->middleware('auth:admin');
     Route::put('/profile/updateActivity',[AdminProfileController::class,'updateActivity'])->name('updateActivity')->middleware('auth:admin');
+    Route::put('/profile/updateImage',[AdminProfileController::class,'updateImage'])->name('updateImage')->middleware('auth:admin');
  });
 
 

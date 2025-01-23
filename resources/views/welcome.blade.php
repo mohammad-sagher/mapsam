@@ -36,6 +36,9 @@
 </style>
 </head>
 <body>
+    @if(auth()->guard('admin')->check())
+    <img src="{{ asset('storage/app/public/profile/images/'.auth()->guard('admin')->user()->images->first()->url) }}">
+    @endif
     @if(auth()->check() )
     <form action="{{ route('logout') }}" method="POST">
         @csrf

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -50,5 +50,10 @@ class Admin extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
-   
+    public function images(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageble');
+    }
+
+
 }
