@@ -4,7 +4,7 @@ use App\Http\Controllers\admin\doctor\DoctorLoginController;
 
 use App\Http\Controllers\admin\doctor\DoctorRegisterController;
 use App\Http\Controllers\doctor\DoctorProfileCountroller;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SocailiteController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\App;
@@ -52,7 +52,7 @@ Route::group(['prefix'=>'doctor','as'=>'doctor.'],function(){
     Route::put('/profile',[DoctorProfileCountroller::class,'updateActivity'])->name('updateActivity')->middleware('auth:doctor');
     Route::put('/profile/password',[DoctorProfileCountroller::class,'updatePassword'])->name('updatePassword')->middleware('auth:doctor');
     Route::put('/profile/data',[DoctorProfileCountroller::class,'updateData'])->name('updateData')->middleware('auth:doctor');
-
+    Route::put('/profile/image',[DoctorProfileCountroller::class,'updateImage'])->name('updateImage')->middleware('auth:doctor');
 
 });
 
@@ -63,4 +63,15 @@ Route::group(['prefix'=>'doctor','as'=>'doctor.'],function(){
     })->name('doctor.dashboard')->middleware('auth:doctor');
 
 
+    Route::get('/testimage', function () {
+        if(auth()->guard('doctor')->check()){
+            $doctor=Auth::guard('doctor')->user()->images;
+            dd($doctor);
+        }
+        if(auth()->guard('admin')->check()){
+            $admin=Auth::guard('admin')->user()->images;
+            dd($admin->first()->url);
+        }
 
+
+    });

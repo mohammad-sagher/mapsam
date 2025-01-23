@@ -17,20 +17,20 @@
 
 
                     @if(auth()->guard('admin')->user()->images->count() > 0)
-                    <div class="pt-5 card-body flex justify-between items-center">
+                    <div class="flex items-center justify-between pt-5 card-body">
                         <div>
-                            <h5 class="card-title text-left">{{ $profile->username ?? Auth::guard('admin')->user()->name }}</h5>
-                            <p class="card-text text-left">{{ Auth::guard('admin')->user()->email }}</p>
-                            <div class="icon-block flex space-x-2 text-left">
+                            <h5 class="text-left card-title">{{ $profile->username ?? Auth::guard('admin')->user()->name }}</h5>
+                            <p class="text-left card-text">{{ Auth::guard('admin')->user()->email }}</p>
+                            <div class="flex space-x-2 text-left icon-block">
                                 <a href="javascript:void();"><i class="text-white fa fa-facebook bg-facebook"></i></a>
                                 <a href="javascript:void();"><i class="text-white fa fa-twitter bg-twitter"></i></a>
                                 <a href="javascript:void();"><i class="text-white fa fa-google-plus bg-google-plus"></i></a>
                             </div>
                         </div>
-                        <img src="{{ asset('images/profile/'.auth()->guard('admin')->user()->images->first()->url) }}" alt="profile-image" class="rounded-full w-16 h-16 ml-4">
-                @else
-                        <img src="{{ asset('images/profile/defualt/defult.jpg') }}" alt="profile-image" class="rounded-full w-16 h-16 ml-4">
-                @endif
+                        @endif
+                        <img src="{{asset('images/profile/'.auth()->user()->images->url) }}" alt="profile-image" class="w-16 h-16 ml-4 rounded-full">
+
+
                     </div>
 
 

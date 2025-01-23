@@ -26,6 +26,9 @@ class DoctorRegisterController extends Controller
 
         ]);
         DoctorProfileControllerByAdmin::createProfile($doctor);
+        $doctor->images()->createOrFirst(['imageable_id'=>$doctor->id],[
+            'url' => 'defult.jpg',
+           ]);
 
         return redirect()->route('admin.dashboard')->with('success','Doctor registered successfully and profile created');
     }

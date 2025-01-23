@@ -3,11 +3,11 @@
     <div class="brand-logo">
      <a href="index.html">
       <img src="{{asset('assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
-      <h5 class="logo-text">Dashtreme Admin</h5>
+      <h5 class="logo-text"></h5>
     </a>
   </div>
   <ul class="sidebar-menu do-nicescrol">
-     <li class="sidebar-header">MAIN NAVIGATION</li>
+     <li class="sidebar-header">MAIN NAVIGATION ADMIN</li>
      <li>
        <a href="{{route('admin.dashboard')}}">
          <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>

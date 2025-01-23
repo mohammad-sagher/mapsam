@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Profile;
+use App\Models\Image;
 class AdminRegisterController extends Controller
 {
     //
@@ -26,6 +27,8 @@ class AdminRegisterController extends Controller
             'address'=>$request->address,
         ]);
         $this->createProfileAdmin($admin);
+        $this->createDefaultImageAdmin($admin);
+
         return redirect()->route('admin.ShowLogin')->with('success','Admin created successfully and profile created');
       }else{
         return redirect()->back()->with('error','Admin key is incorrect');
@@ -43,4 +46,9 @@ class AdminRegisterController extends Controller
         $admin->profile_id=$profile->id;
         $admin->save();
     }
+  public function createDefaultImageAdmin(Admin $admin){
+    $admin->images()->createOrFirst(['imageable_id'=>$admin->id],[
+        'url'=>'defult.jpg',
+    ]);
+  }
 }

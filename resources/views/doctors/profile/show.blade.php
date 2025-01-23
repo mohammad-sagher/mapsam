@@ -18,7 +18,7 @@
                         <img class="img-fluid" src="https://via.placeholder.com/800x500" alt="Card image cap">
                     </div>
                     <div class="pt-5 card-body">
-                        <img src="https://via.placeholder.com/110x110" alt="profile-image" class="profile">
+                        <img src="{{asset('images/profile/'.auth()->user()->images->url) }}" alt="profile-image" class="profile">
                         <h5 class="card-title">{{ $profile->username ?? Auth::guard('doctor')->user()->name }}</h5>
                         <p class="card-text">{{ Auth::guard('doctor')->user()->email }}</p>
                         <div class="icon-block">
@@ -146,14 +146,18 @@
 
                             <!-- Edit Tab -->
                             <div class="tab-pane" id="edit">
+                                <form action="{{ route('doctor.updateImage') }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="file" name="image" class="form-control">
+                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                </form>
+                            <div class="tab-pane" id="edit">
 
                                 <form action="{{ route('doctor.updateData') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
-                                        <div class="col-lg-9"><input class="file" name="image" type="file" accept="image/*" id="image"></div>
-                                    </div>
+
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                         <div class="col-lg-9"><input class="form-control" name="phone" type="text" value="{{ $profile->phone ?? Auth::guard('doctor')->user()->phone }}"></div>
