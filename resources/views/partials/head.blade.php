@@ -5,6 +5,8 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
     <!-- loader-->
     <link href="{{ asset('assets/css/pace.min.css') }}" rel="stylesheet"/>
     <script src="{{ asset('assets/js/pace.min.js') }}"></script>
@@ -31,5 +33,5 @@
     <!-- Full Calendar CSS -->
     <link href="{{ asset('assets/plugins/fullcalendar/css/fullcalendar.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/plugins/fullcalendar/css/fullcalendar.print.min.css') }}" rel="stylesheet" media="print"/>
-  
+
 </head>

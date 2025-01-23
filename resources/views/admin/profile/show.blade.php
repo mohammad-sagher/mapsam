@@ -14,19 +14,27 @@
         <div class="mt-3 row">
             <div class="col-lg-4">
                 <div class="card profile-card-2" style="height: 100%;"> <!-- استخدام 100% للإرتفاع -->
-                    <div class="card-img-block">
-                        <img class="img-fluid" src="https://via.placeholder.com/800x500" alt="Card image cap">
-                    </div>
-                    <div class="pt-5 card-body">
-                        <img src="https://via.placeholder.com/110x110" alt="profile-image" class="profile">
-                        <h5 class="card-title">{{ $profile->username ?? Auth::guard('admin')->user()->name }}</h5>
-                        <p class="card-text">{{ Auth::guard('admin')->user()->email }}</p>
-                        <div class="icon-block">
-                            <a href="javascript:void();"><i class="text-white fa fa-facebook bg-facebook"></i></a>
-                            <a href="javascript:void();"><i class="text-white fa fa-twitter bg-twitter"></i></a>
-                            <a href="javascript:void();"><i class="text-white fa fa-google-plus bg-google-plus"></i></a>
+
+
+                    @if(auth()->guard('admin')->user()->images->count() > 0)
+                    <div class="pt-5 card-body flex justify-between items-center">
+                        <div>
+                            <h5 class="card-title text-left">{{ $profile->username ?? Auth::guard('admin')->user()->name }}</h5>
+                            <p class="card-text text-left">{{ Auth::guard('admin')->user()->email }}</p>
+                            <div class="icon-block flex space-x-2 text-left">
+                                <a href="javascript:void();"><i class="text-white fa fa-facebook bg-facebook"></i></a>
+                                <a href="javascript:void();"><i class="text-white fa fa-twitter bg-twitter"></i></a>
+                                <a href="javascript:void();"><i class="text-white fa fa-google-plus bg-google-plus"></i></a>
+                            </div>
                         </div>
+                        <img src="{{ asset('images/profile/'.auth()->guard('admin')->user()->images->first()->url) }}" alt="profile-image" class="rounded-full w-16 h-16 ml-4">
+                @else
+                        <img src="{{ asset('images/profile/defualt/defult.jpg') }}" alt="profile-image" class="rounded-full w-16 h-16 ml-4">
+                @endif
                     </div>
+
+
+
 
                     <div class="card-body border-top border-light">
                         @foreach (['HTML5' => 65, 'Bootstrap 4' => 50, 'AngularJS' => 70, 'React JS' => 35] as $skill => $percentage)
@@ -146,14 +154,16 @@
 
                             <!-- Edit Tab -->
                             <div class="tab-pane" id="edit">
-
+                                    <form action="{{ route('admin.updateImage') }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="file" name="image" class="form-control">
+                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                    </form>
                                 <form action="{{ route('admin.updateData') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
-                                        <div class="col-lg-9"><input class="file" name="image" type="file" accept="image/*" id="image"></div>
-                                    </div>
+
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                         <div class="col-lg-9"><input class="form-control" name="phone" type="text" value="{{ $profile->phone ?? Auth::guard('admin')->user()->phone }}"></div>
