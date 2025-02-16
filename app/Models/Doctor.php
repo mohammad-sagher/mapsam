@@ -26,7 +26,7 @@ class Doctor extends Authenticatable
         'password',
         'phone',
         'address',
-        'speciality',
+
     ];
 
     /**
@@ -63,6 +63,9 @@ class Doctor extends Authenticatable
    }
    public function appointments(){
     return $this->hasMany(Appointment::class);
+   }
+   public function specializations(){
+    return $this->belongsToMany(Specialization::class, 'specialization_doctors', 'doctor_id', 'specialization_id');
    }
 
     }
