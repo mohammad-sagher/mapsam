@@ -34,11 +34,25 @@
             <div class="form-group">
                 <label for="input-3">address</label>
                 <input type="text" name="address" class="form-control" id="input-3" placeholder="Enter Your address" value="{{old('address')}}    ">
-            </div>
-            <div class="form-group">
-                <label for="input-3">speciality</label>
-                <input type="text" name="speciality" class="form-control" id="input-3" placeholder="Enter Your speciality" value="{{old('speciality')}}    ">
-            </div>
+                <div class="form-group">
+                    <label for="input-3">Speciality</label>
+                    <select name="speciality[]" class="form-control select2" id="input-3" multiple>
+                        @foreach ($specializations as $specialization)
+                            <option value="{{ $specialization->id }}">{{ $specialization->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <script>
+                    $(document).ready(function() {
+                        $('.select2').select2({
+                            placeholder: "Select specialities",
+                            allowClear: true
+                        });
+                    });
+                </script>
+
+
             <div class="form-group">
             <label for="input-4">Password</label>
             <input type="text" name="password" class="form-control" id="input-4" placeholder="Enter Password" value="{{old('password')}}">
