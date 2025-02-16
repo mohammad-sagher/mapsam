@@ -41,7 +41,7 @@ class AvalaibletimeDoctorController extends Controller
 
 
                $doctor->avaliableTimes()->create($request->validated());
-
+//observe the doctor
 
         return redirect()->route('doctor.avaliable_times.index')->with('success','Avaliable Time and Time Slots Created Successfully');
     }
