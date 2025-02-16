@@ -42,3 +42,17 @@ $.sidebarMenu = function(menu) {
 
 
 });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.getElementById('availableTimesToggle');
+        const submenu = document.getElementById('availableTimesSubmenu');
+        const arrowIcon = toggleButton.querySelector('.zmdi-chevron-down');
+
+        toggleButton.addEventListener('click', function (e) {
+            e.preventDefault(); // منع السلوك الافتراضي للرابط
+            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+            arrowIcon.classList.toggle('rotate'); // تدوير السهم
+        });
+    });
+

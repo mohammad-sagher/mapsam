@@ -185,3 +185,35 @@
 .sidebar-menu-rtl .sidebar-submenu>li.active>a, .sidebar-menu-rtl .sidebar-submenu>li>a:hover {
 	color: #fff;
 }
+/* تنسيق القائمة الفرعية */
+.submenu {
+    list-style: none;
+    padding-left: 20px; /* مسافة بادئة للقائمة الفرعية */
+    display: none; /* إخفاء القائمة الفرعية بشكل افتراضي */
+}
+
+.submenu li {
+    margin: 5px 0;
+}
+
+.submenu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.submenu li a:hover {
+    background-color: #444; /* لون الخلفية عند التمرير */
+}
+
+/* تنسيق السهم */
+.zmdi-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.zmdi-chevron-down.rotate {
+    transform: rotate(180deg);
+}
+

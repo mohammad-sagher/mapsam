@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Models\Admin;
 use App\Models\Doctor;
 use App\Models\Accountant;
+use App\Models\Avaliable_time;
+use App\Observers\doctor\AvaliableTimeObserve;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -28,5 +30,6 @@ class AppServiceProvider extends ServiceProvider
             'doctor' => Doctor::class,
             'accountant' => Accountant::class,
         ]);
+        Avaliable_time::observe(AvaliableTimeObserve::class);
     }
 }
