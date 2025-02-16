@@ -13,15 +13,21 @@
          <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
        </a>
      </li>
-
-     <li>
-      @if(auth()->guard('admin')->check())
-      <a href="{{route('doctor.ShowRegister')}}">
-        <i class="zmdi zmdi-invert-colors"></i> <span>Registeration doctor</span>
-      </a>
-      @endif
-
+     <li class="nav-item">
+        <a href="#" class="nav-link" id="doctorToggle">
+            <i class="zmdi zmdi-invert-colors"></i> <span>Doctors</span>
+            <i class="zmdi zmdi-chevron-down float-end"></i> <!-- Arrow icon -->
+        </a>
+        <ul class="submenu" id="doctorSubmenu">
+            <li><a class="text-white dropdown-item" href="{{ route('admin.doctor.specialization.create') }}">Create Specialization</a></li>
+            <li><a class="text-white dropdown-item" href="{{ route('admin.doctor.specialization.index') }}">Show Specializations</a></li>
+            <a href="{{route('doctor.ShowRegister')}}" >
+                <i class="zmdi zmdi-invert-colors"></i> <span>Registeration doctor</span>
+              </a>
+        </ul>
     </li>
+
+
     <li>
         @if(auth()->guard('admin')->check())
         <a href="{{route('accountant.ShowRegister')}}" >

@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
             $schedule->command('generate:time-slots')->dailyAt('23:50');
     }
+    
 
     /**
      * Register the commands for the application.

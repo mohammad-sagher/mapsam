@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\auth\AdminLoginController;
 use App\Http\Controllers\admin\auth\AdminRegisterController;
 use App\Http\Controllers\admin\doctor\InformationDoctorController;
 use App\Http\Controllers\admin\profile\AdminProfileController;
+use App\Http\Controllers\admin\doctor\SpecializationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocailiteController;
 use App\Http\Controllers\ProfileController;
@@ -41,6 +42,18 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
     Route::put('/profile/updateActivity',[AdminProfileController::class,'updateActivity'])->name('updateActivity')->middleware('auth:admin');
     Route::put('/profile/updateImage',[AdminProfileController::class,'updateImage'])->name('updateImage')->middleware('auth:admin');
  });
+
+
+
+ Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
+    Route::get('/doctor/specialization',[SpecializationController::class,'index'])->name('doctor.specialization.index');
+    Route::get('/doctor/specialization/create',[SpecializationController::class,'create'])->name('doctor.specialization.create');
+    Route::post('/doctor/specialization',[SpecializationController::class,'store'])->name('doctor.specialization.store');
+    Route::get('/doctor/specialization/{specialization}/edit',[SpecializationController::class,'edit'])->name('doctor.specialization.edit');
+    Route::put('/doctor/specialization/{specialization}',[SpecializationController::class,'update'])->name('doctor.specialization.update');
+    Route::delete('/doctor/specialization/{specialization}',[SpecializationController::class,'destroy'])->name('doctor.specialization.destroy');
+
+ })->middleware('auth:admin');
 
 
 

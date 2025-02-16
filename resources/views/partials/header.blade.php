@@ -41,10 +41,15 @@
         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
           <span class="user-profile"><img src="{{asset('images/profile/'.auth()->guard('accountant')->user()->images->url) }}" class="img-circle" alt="user avatar"></span>
         </a>
-       @else
+       @elseif(auth()->guard('admin')->check())
        <li class="nav-item">
          <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-           <span class="user-profile"><img src="{{asset('images/profile/'.auth()->user()->images->url) }}" class="img-circle" alt="user avatar"></span>
+           <span class="user-profile"><img src="{{asset('images/profile/'.auth()->guard('admin')->user()->images->url) }}" class="img-circle" alt="user avatar"></span>
+         </a>
+         @elseif(auth()->guard('doctor')->check())
+         <li class="nav-item">
+         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
+           <span class="user-profile"><img src="{{asset('images/profile/'.auth()->guard('doctor')->user()->images->url) }}" class="img-circle" alt="user avatar"></span>
          </a>
          @endif
          <ul class="dropdown-menu dropdown-menu-right">
@@ -62,10 +67,15 @@
             <div class="media">
                 <div class="avatar"><img class="mr-3 align-self-start" src="{{asset('images/profile/'.auth()->guard('accountant')->user()->images->url) }}" alt="user avatar"></div>
                <div class="media-body">
-            @else
+            @elseif(auth()->guard('admin')->check())
               <div class="media">
-                <div class="avatar"><img class="mr-3 align-self-start" src="{{asset('images/profile/'.auth()->user()->images->url) }}" alt="user avatar"></div>
+                <div class="avatar"><img class="mr-3 align-self-start" src="{{asset('images/profile/'.auth()->guard('admin')->user()->images->url) }}" alt="user avatar"></div>
                <div class="media-body">
+            @elseif(auth()->guard('doctor')->check())
+              <div class="media">
+                <div class="avatar"><img class="mr-3 align-self-start" src="{{asset('images/profile/'.auth()->guard('doctor')->user()->images->url) }}" alt="user avatar"></div>
+               <div class="media-body">
+                
            @endif
                 @if(auth()->guard('admin')->check())
                <h6 class="mt-2 user-title">{{ auth()->guard('admin')->user()->name }}</h6>

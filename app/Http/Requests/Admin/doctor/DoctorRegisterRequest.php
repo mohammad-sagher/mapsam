@@ -26,7 +26,7 @@ class DoctorRegisterRequest extends FormRequest
             'email'=>'required|email|unique:doctors,email',
             'phone'=>'required|unique:doctors,phone',
             'address'=>'required|string|max:255',
-            'speciality'=>'required|string|max:255',
+            'speciality'=>'required|array',
             'password'=>'required|min:8',
             'confirm_password'=>'required|min:8',
         ];

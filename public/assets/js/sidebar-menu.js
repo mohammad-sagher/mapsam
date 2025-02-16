@@ -55,4 +55,16 @@ $.sidebarMenu = function(menu) {
             arrowIcon.classList.toggle('rotate'); // تدوير السهم
         });
     });
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.getElementById('doctorToggle');
+        const submenu = document.getElementById('doctorSubmenu');
+        const arrowIcon = toggleButton.querySelector('.zmdi-chevron-down');
+
+        toggleButton.addEventListener('click', function (e) {
+            e.preventDefault(); // منع السلوك الافتراضي للرابط
+            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+            arrowIcon.classList.toggle('rotate'); // تدوير السهم
+        });
+    });
+
 
