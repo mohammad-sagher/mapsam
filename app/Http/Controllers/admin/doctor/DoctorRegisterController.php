@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\doctor\DoctorRegisterRequest;
 use App\Models\Doctor;
+use App\Models\Specialization;
 class DoctorRegisterController extends Controller
 {
     //
     public function ShowRegister(){
-      return view('admin.informationDoctor.register');
+        $specializations = Specialization::all();
+      return view('admin.informationDoctor.register',compact('specializations'));
     }
     public function Register(DoctorRegisterRequest $request){
 
@@ -22,9 +24,12 @@ class DoctorRegisterController extends Controller
             'password'=>Hash::make($request->password),
             'phone'=>$request->phone,
             'address'=>$request->address,
-            'speciality'=>$request->speciality,
+
 
         ]);
+        if ($request->has('speciality') && is_array($request->speciality)) {
+            $doctor->specializations()->attach($request->speciality);
+        }
         DoctorProfileControllerByAdmin::createProfile($doctor);
         $doctor->images()->createOrFirst(['imageable_id'=>$doctor->id],[
             'url' => 'defult.jpg',
